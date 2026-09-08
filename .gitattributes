@@ -1,0 +1,9 @@
+# Shell scripts must be LF. A CRLF shebang line makes the kernel look for an
+# interpreter named "bash\r", which fails with the useless message
+# "bad interpreter: No such file or directory" — a loud failure, but a misleading
+# one. Authored on Windows, run on Linux; pin it here rather than relying on
+# every contributor's core.autocrlf.
+* text=auto eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.json text eol=lf
