@@ -1,0 +1,35 @@
+{
+  "_comment": "Wire the four hooks into .claude/settings.json. Paths are relative to the project root; adjust if you keep the hooks elsewhere. Override the memory location with the AGENT_MEMORY_DIR environment variable (default: <project>/memory).",
+
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "bash .claude/hooks/session-start.sh" }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          { "type": "command", "command": "bash .claude/hooks/session-end.sh" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "bash .claude/hooks/prompt-counter.sh" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": "bash .claude/hooks/memory-guard.sh" }
+        ]
+      }
+    ]
+  }
+}
