@@ -1,6 +1,6 @@
 # The catalog
 
-Fifteen confirmed silent failures. Each one exited `0`, produced a plausible result,
+Eighteen confirmed silent failures. Each one exited `0`, produced a plausible result,
 and surfaced later somewhere unrelated.
 
 ## Index
@@ -22,6 +22,9 @@ and surfaced later somewhere unrelated.
 | 12 | [A quoted heredoc collapses backslashes in the script it writes](tooling.md#12-a-quoted-heredoc-collapses-backslashes-in-the-script-it-writes) | Tooling |
 | 13 | [`ProtectHome=yes` makes a running service look stopped](tooling.md#13-protecthomeyes-makes-a-running-service-look-stopped) | Tooling |
 | 14 | [A cheap-looking periodic measurement burns a core](tooling.md#14-a-cheap-looking-periodic-measurement-burns-a-core) | Tooling |
+| 16 | [A missing environment variable selects the permissive default](config-and-data.md#16-a-missing-environment-variable-selects-the-permissive-default) | Config |
+| 17 | [Diagnosing DNS from a single resolver](config-and-data.md#17-diagnosing-dns-from-a-single-resolver) | Config |
+| 18 | [Two schemas, one reader — content renders empty](config-and-data.md#18-two-schemas-one-reader--content-renders-empty) | Data |
 | + | [Four ways a session-memory bridge goes stale](memory.md) | Memory |
 
 ## The format

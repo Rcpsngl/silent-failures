@@ -39,6 +39,8 @@ Confirmed members so far:
 | A quoted heredoc writing a shell script | `bash -n` clean | Backslashes collapsed; behavior changed |
 | A session-memory hook | Injects "last session" | Injects a *day-old* session |
 | An agent | "Done, all tests pass" | Ran the tests in a directory with no tests |
+| An unset `APP_ENV` | Nothing | Every guard behind it stayed permissive |
+| One DNS resolver | "Records are correct" | The old nameserver was still answering everyone else |
 
 ---
 
@@ -64,7 +66,7 @@ into re-reading logic that was right the whole time.
 
 ### [`catalog/`](catalog/) — the failure modes
 
-Fourteen documented silent failures, grouped by domain, each in a fixed format:
+Eighteen documented silent failures, grouped by domain, each in a fixed format:
 **Symptom → Reality → Why it wasn't caught → Guardrail.** Root causes are traced to
 actual source where it was possible to trace them (the Jest one bottoms out in a
 regex in `jest-util`).
@@ -73,6 +75,7 @@ regex in `jest-util`).
 - [Git, worktrees, and parallel work](catalog/git-and-worktrees.md)
 - [Multi-agent orchestration](catalog/agents.md)
 - [Tooling, environments, and servers](catalog/tooling.md)
+- [Configuration and data](catalog/config-and-data.md)
 - [Session memory](catalog/memory.md)
 
 ### [`memory-system/`](memory-system/) — cross-session memory that fails loudly
