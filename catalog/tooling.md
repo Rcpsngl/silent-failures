@@ -61,7 +61,7 @@ Fix: `io.open(p, 'w', encoding='utf-8', newline='')`, or write bytes.
 
 ### 13. `ProtectHome=yes` makes a running service look stopped
 
-**Symptom.** A monitoring dashboard showed `callcenter-api` as **stopped**. It had been
+**Symptom.** A monitoring dashboard showed `api-worker` as **stopped**. It had been
 running without interruption for 118 days.
 
 2026-09-03.
