@@ -144,12 +144,45 @@ separately that those commits are genuinely unwanted.
 
 ---
 
-## The rule these four share
+### 15. A worktree isolates the code, not the database
+
+**Symptom.** Two agents working in parallel, one in the main checkout and one in a
+separate worktree. "We used separate worktrees" was treated as proof of isolation. The
+verification run came back green.
+
+2026-08-18.
+
+**Reality.** Both runs used the **same test database**. A worktree isolates the *working
+tree*; the database name came from the environment, which both inherited. The green
+result was luck. Had the runs collided, the outcome would have been meaningless — and
+nothing would have indicated it.
+
+**Why it wasn't caught.** Because the isolation was real, just narrower than assumed.
+Worktrees solve file contention so completely that they get treated as general-purpose
+isolation, and nobody re-asks what else is shared. Test fixtures that clean up with broad
+`delete_many` calls will happily delete another run's rows, and the resulting pass or
+fail carries no information either way.
+
+**Guardrail.** Before running database-backed tests in a worktree, check whether another
+run is live. If it might be, give the run its own database:
+
+```bash
+DB_NAME=app_test_wt2 pytest tests/
+```
+
+More generally, when you isolate something, enumerate what is still shared: the database,
+the cache, the ports, `node_modules`, the dev server, temp directories, the package
+registry. A worktree covers exactly one of those.
+
+---
+
+## The rule these five share
 
 > A git command returning success means the command ran. It says nothing about whether
 > it did what you wanted.
 
 Before a destructive git operation, ask what the command actually operates on: the
 working tree (`stash`), the link target (`worktree remove`), one line of ancestry
-(`--merged`), or your current position (`checkout`). Three of the four failures above
-are cases where that scope was wider or narrower than assumed.
+(`--merged`), or your current position (`checkout`). Four of the five failures above are
+cases where that scope was wider or narrower than assumed — and the fifth is the same
+mistake about a worktree.

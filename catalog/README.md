@@ -1,6 +1,6 @@
 # The catalog
 
-Fourteen confirmed silent failures. Each one exited `0`, produced a plausible result,
+Fifteen confirmed silent failures. Each one exited `0`, produced a plausible result,
 and surfaced later somewhere unrelated.
 
 ## Index
@@ -15,6 +15,7 @@ and surfaced later somewhere unrelated.
 | 6 | [`git stash` in a shared working copy swallows other people's work](git-and-worktrees.md#6-git-stash-in-a-shared-working-copy-swallows-other-peoples-work) | Git |
 | 7 | [A failed `git checkout` silently produces the wrong base](git-and-worktrees.md#7-a-failed-git-checkout-silently-produces-the-wrong-base) | Git |
 | 8 | [`--merged` answers a different question than the one you asked](git-and-worktrees.md#8---merged-answers-a-different-question-than-the-one-you-asked) | Git |
+| 15 | [A worktree isolates the code, not the database](git-and-worktrees.md#15-a-worktree-isolates-the-code-not-the-database) | Git |
 | 9 | [Parallel agents in one working copy clobber each other's index](agents.md#9-parallel-agents-in-one-working-copy-clobber-each-others-index) | Agents |
 | 10 | [Polling a running subagent costs more than the work](agents.md#10-polling-a-running-subagent-costs-more-than-the-work) | Agents |
 | 11 | [An absence verdict from a single file](agents.md#11-an-absence-verdict-from-a-single-file) | Agents |
