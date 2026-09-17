@@ -32,7 +32,25 @@ The trap is **not** specific to worktrees. The trigger is any directory in `root
 whose name starts with a dot — or with `{}()+?^$`. `.claude/worktrees/` is just the
 one you'll meet first.
 
+Two refinements, both measured against jest 29.7.0 after this entry was first written:
+
+- **A relative `testMatch` does not trip it.** Jest's default pattern is relative, so
+  your absolute path never enters the glob. The exposure comes from configs that anchor
+  to `<rootDir>` — Create React App generates `'<rootDir>/src/**/__tests__/**/*'`, which
+  normalization expands to an absolute path *before* the backslash replacement runs.
+- **The bug alone is loud — it exits `1`.** Reproduced bare, jest reports "No tests
+  found" and fails. Reaching exit `0` needs a second ingredient: `--passWithNoTests`
+  (or a watch-mode wrapper). That flag exists for a good reason — an empty package in a
+  monorepo shouldn't break the build — and it is what converts this alarm into a pass.
+  The silence is the composition of two defensible decisions, not one bug.
+
+Filed upstream as [jest#15132](https://github.com/jestjs/jest/issues/15132), duplicate
+of #8520 / #9032 / #9258 — open since 2019. Being documented doesn't help, because
+nothing in the pipeline is reading the `testMatch` line.
+
 And zero-collected looks almost exactly like zero-failing.
+
+Full write-up: [`writing/jest-collects-zero-tests.md`](../writing/jest-collects-zero-tests.md).
 
 **Guardrail.**
 
